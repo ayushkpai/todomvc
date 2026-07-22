@@ -22,11 +22,9 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="min-h-screen flex flex-col bg-gray-700 text-white">
     <main class="container mx-auto mt-5 px-5 flex">
       <%= yield %>
     </main>
-
-    <%# <%= render "shared/flash" %> %>
   </body>
 </html>
