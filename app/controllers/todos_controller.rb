@@ -1,14 +1,10 @@
 class TodosController < ApplicationController
-  before_action :set_todo, only: %i[ show edit update destroy ]
+  before_action :set_todo, only: %i[ edit update destroy ]
 
   # GET /todos or /todos.json
   def index
     @todo = Todo.new
     @todos = Todo.all
-  end
-
-  # GET /todos/1 or /todos/1.json
-  def show
   end
 
   # GET /todos/new
@@ -39,7 +35,7 @@ class TodosController < ApplicationController
   def update
     respond_to do |format|
       if @todo.update(todo_params)
-        format.html { redirect_to @todo, notice: "Todo was successfully updated.", status: :see_other }
+        format.html { redirect_to todos_path, notice: "Todo was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @todo }
       else
         format.html { render :edit, status: :unprocessable_content }

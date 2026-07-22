@@ -3,17 +3,17 @@
 <div class="w-full">
   <h1 class="text-center text-4xl text-pink-400">Todos</h1>
 
-  <div class="flex justify-center">
+  <div class="flex justify-center mt-5">
     <div class="bg-white text-black w-120">
       <div>
         <%= render "todos/form", todo: @todo %>
       </div>  
 
       <% if notice.present? %>
-        <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md text-center" id="notice"><%= notice %></p>
+        <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md text-center mx-2" id="notice"><%= notice %></p>
       <% end %>
 
-      <div id="todos" class="min-w-full divide-y divide-gray-200 space-y-5">
+      <div id="todos" class="min-w-full space-y-5 mx-2">
         <% if @todos.any? %>
           <% @todos.each do |todo| %>
             <div class="flex flex-col sm:flex-row justify-between items-center pb-5 sm:pb-0">
