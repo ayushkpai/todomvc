@@ -1,0 +1,39 @@
+<% flash.each do |type, message| %>
+  <% is_notice = type.to_s == "notice" %>
+
+  <div
+    id="flash"
+    class="<%= class_names(
+      "fixed top-5 right-5 flex items-start gap-3 px-4 py-3 rounded-xl shadow-lg text-sm z-50 border transition-all duration-500",
+      {
+        "bg-green-500/20 border-green-500/40 text-green-200": is_notice,
+        "bg-red-500/20 border-red-500/40 text-red-200": !is_notice
+      }
+    ) %>"
+  >
+    <!-- MESSAGE -->
+    <div class="pr-2">
+      <%= message %>
+    </div>
+
+    <!-- DISMISS BUTTON -->
+    <button
+      type="button"
+      onclick="closeFlash()"
+      class="text-white/60 hover:text-white transition text-lg leading-none"
+    >
+      ✕
+    </button>
+  </div>
+
+  <script>
+    function closeFlash() {
+      const flash = document.getElementById("flash")
+      if (!flash) return
+      flash.classList.add("opacity-0", "translate-y-[-10px]")
+      setTimeout(() => flash.remove(), 500)
+    }
+
+    setTimeout(closeFlash, 5000)
+  </script>
+<% end %>
