@@ -17,23 +17,19 @@ class TodosController < ApplicationController
     @todo = Todo.new(todo_params)
 
     if @todo.save
-      redirect_to todos_path, notice: "Todo was successfully created."
+      redirect_to todos_path, notice: "Todo was successfully created"
     else
-      redirect_to todos_path, alert: "Todo could not be created."
+      redirect_to todos_path, alert: "Todo could not be created"
     end
   end
 
-  def update
-    respond_to do |format|
+    def update
       if @todo.update(todo_params)
-        format.html { redirect_to todos_path, notice: "Todo was successfully updated", status: :see_other }
-        format.json { render :show, status: :ok, location: @todo }
+        redirect_to todos_path, notice: "Todo was successfully updated", status: :see_other
       else
-        format.html { render :edit, status: :unprocessable_content }
-        format.json { render json: @todo.errors, status: :unprocessable_content }
+        redirect_to todos_path, alert: "Todo could not be updated", status: :see_other
       end
     end
-  end
 
   def destroy
     @todo.destroy!
