@@ -23,13 +23,13 @@ class TodosController < ApplicationController
     end
   end
 
-    def update
-      if @todo.update(todo_params)
-        redirect_to todos_path, notice: "Todo was successfully updated", status: :see_other
-      else
-        redirect_to todos_path, alert: "Todo could not be updated", status: :see_other
-      end
+  def update
+    if @todo.update(todo_params)
+      redirect_to todos_path, notice: "Todo was successfully updated", status: :see_other
+    else
+      redirect_to todos_path, alert: "Todo could not be updated", status: :see_other
     end
+  end
 
   def destroy
     @todo.destroy!
@@ -40,12 +40,19 @@ class TodosController < ApplicationController
     end
   end
 
-  private
-    def set_todo
-      @todo = Todo.find(params.expect(:id))
-    end
+  def toggle
+    @todo = Todo.find(params[:id])
+    @todo.update(completed: !@todo.completed)
 
-    def todo_params
-      params.expect(todo: [ :name ])
-    end
+    redirect_to todos_path
+  end
+
+private
+  def set_todo
+    @todo = Todo.find(params.expect(:id))
+  end
+
+  def todo_params
+    params.expect(todo: [ :name ])
+  end
 end

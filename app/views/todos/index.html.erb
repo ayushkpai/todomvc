@@ -9,18 +9,29 @@
       <div id="todos" class="min-w-full space-y-5 mx-2">
         <% if @todos.any? %>
           <% @todos.each do |todo| %>
-            <div class="flex flex-col sm:flex-row justify-between items-center pb-5 sm:pb-0">
+            <div class="flex flex-col sm:flex-row justify-between items-center pb-5 border-b border-white/40">
               <div class="w-full">
                 <div id="show-<%= todo.id %>">
-                  <%= render todo %>
+                  <div class="flex items-center gap-2">
+                    <% if todo.completed %>
+                      <span class="text-green-600 text-xl">✔</span>
+                    <% end %>
+
+                    <div class="<%= 'line-through text-gray-600' if todo.completed %>">
+                      <%= render todo %>
+                    </div>
+                  </div>
                 </div>
+
                 <div id="edit-<%= todo.id %>" class="hidden mt-2">
                   <%= render "todos/form", todo: todo %>
                 </div>
               </div>
-              <div class="w-full sm:w-auto flex flex-col sm:flex-row gap-2">
-                <button type="button" onclick="toggleEdit(<%= todo.id %>)" class="w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 inline-block font-medium">✏️</button>
-                <%= button_to "X", todo, method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-red-600 hover:text-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+
+              <div class="w-full sm:w-auto flex flex-col sm:flex-row gap-2 mt-3 sm:mt-0">
+                <%= button_to(todo.completed ? "↩ Undo" : "✓ Done", toggle_todo_path(todo), method: :patch, class: "w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white rounded-md px-3 py-2") %>
+                <button type="button" onclick="toggleEdit(<%= todo.id %>)" class="w-full sm:w-auto bg-yellow-400 hover:bg-yellow-500 rounded-md px-3 py-2">✏️ Edit</button>
+                <%= button_to("🗑 Delete", todo, method: :delete, class: "w-full sm:w-auto bg-red-500 hover:bg-red-600 text-white rounded-md px-3 py-2", data: { turbo_confirm: "Are you sure" }) %>
               </div>
             </div>
           <% end %>
