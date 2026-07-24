@@ -1,24 +1,19 @@
-# README
+# TodoMVC
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- Open your terminal and clone this repository
+    
+    First make sure you have a ssh key if you dont have go to my dotfiles repository and follow the instructions
 
-Things you may want to cover:
+    ```
+    git clone git@github.com:ayushkpai/todomvc.git
+    ```
 
-* Ruby version
+- Next install ruby and rails
 
-* System dependencies
+    Also documented in dotfiles
 
-* Configuration
+- To run the project
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+    ```
+    ./bin/dev
+    ```
